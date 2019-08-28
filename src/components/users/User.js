@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Fragment, Component } from 'react'
+import { Link } from 'react-router-dom'
+import Spinner from '../layout/Spinner'
 
 export default class User extends Component {
   componentDidMount() {
@@ -10,17 +12,74 @@ export default class User extends Component {
       avatar_url,
       bio,
       blog,
-      login,
+      company,
+      location,
       html_url,
       followers,
       following,
       public_repos,
-      public_gists
+      public_gists,
+      hireable
     } = this.props.user
+
+    const { loading } = this.props;
+    if (loading) return <Spinner />
+
     return (
-      <div>
-        {login}
-      </div>
+      <Fragment>
+        <Link to="/" className="btn btn-light">返回</Link>
+        是否在职:{' '}
+        {hireable ? (
+          <i className="fa fa-check text-success" />
+        ) : (
+            <i className="fa fa-times-circle text-danger" />
+          )}
+        <div className="card grid-2">
+          <div className="all-center">
+            <img src={avatar_url} className="round-img"
+              style={{ width: '150px' }} alt="" />
+            <h1>{name}</h1>
+            <p>所在地：{location}</p>
+          </div>
+          <div>
+            {bio && (
+              <Fragment>
+                <h3>个人简介</h3>
+                <p>{bio}</p>
+              </Fragment>
+            )}
+            <a href={html_url} target="_blank" className="btn btn-dark my-1">
+              访问
+            </a>
+            <ul>
+              <li>{company && (
+                <Fragment>
+                  <strong>公司：</strong>{company}
+                </Fragment>
+              )}</li>
+              <li>{blog && (
+                <Fragment>
+                  <strong>网址：</strong>{blog}
+                </Fragment>
+              )}</li>
+            </ul>
+          </div>
+        </div>
+        <div className="card text-center">
+          <div className="badge badge-primary">
+            Followers:{followers}
+          </div>
+          <div className="badge badge-success">
+            Followers:{following}
+          </div>
+          <div className="badge badge-light">
+            Followers:{public_repos}
+          </div>
+          <div className="badge badge-dark">
+            Followers:{public_gists}
+          </div>
+        </div>
+      </Fragment>
     )
   }
 }
