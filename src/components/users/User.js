@@ -70,15 +70,16 @@ export default class User extends Component {
             Followers:{followers}
           </div>
           <div className="badge badge-success">
-            Followers:{following}
+            Following:{following}
           </div>
           <div className="badge badge-light">
-            Followers:{public_repos}
+            Public Repos:{public_repos}
           </div>
           <div className="badge badge-dark">
-            Followers:{public_gists}
+            Public Gists:{public_gists}
           </div>
         </div>
+
       </Fragment>
     )
   }
